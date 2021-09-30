@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+    <script>
+        function callBack(data){
+
+            console.log(data.responseJSON);
+            // chart_data = test(data.responseJSON);
+            // console.log(chart_data)
+            var chart_data = data.responseJSON;
+            array = []
+            x = []
+            for(let point in chart_data){
+                // console.log(point);
+                // console.log(point.score);
+                x.push(chart_data[point].date);
+                array.push(chart_data[point].score);
+            }
+            console.log(array)
+            bart_data = test(array,x)
+            var ctx = document.getElementById("myChart").getContext("2d");
+            //var myNewChart = new Chart(ctx).Line(chart_data);
+            var myNewChart = new Chart(ctx,{
+                type: 'line',
+                data: bart_data,
+
+            });
+
+        }
+        function AJAXReq(callback){
+            $.ajax({
+                url: '/posts',
+                type: 'get',
+                dataType: 'json',
+                complete: callBack,
+            });
+        }
+        function test(mata, x){
+            var data = {
+            labels: x,
+            datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: mata
+                    }
+                ]
+            };
+            //console.log(data);
+            return data;
+
+        };
+        AJAXReq(()=>{
+            console.log("success!");
+        });
+        
+    </script>
+</body>
+</html>
