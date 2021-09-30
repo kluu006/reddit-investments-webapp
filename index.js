@@ -7,6 +7,7 @@ const DATABASE_NAME = "reddit"
 const http = require("http");
 const fs = require("fs");
 const path = require('path');
+//const chartScript = require('./chartScript.js')
 var app = Express();
 var database, collection;
 
@@ -15,10 +16,10 @@ const { JSDOM } = require( "jsdom" );
 const { window } = new JSDOM( "" );
 const $ = require( "jquery" )( window );
 
+app.use('/js', Express.static(__dirname + '/js'));
 
-
-app.get("/posts", (req, res) => {
-    collection.find({}).toArray((error, result) => {
+app.get("/threads/:stockName", (req, res) => {
+    collection.find({query: req.params.stockName}).toArray((error, result) => {
         if(error) {
             return res.status(500).send(error);
         }

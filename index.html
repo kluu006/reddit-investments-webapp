@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="authors" content="MichaelKND, Kluu6">
+    <meta name="description" content="Reddit Investment Sentiment does a crude analysis of Reddit user sentiment on a given set of stocks.">
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  
+    <link rel="ico" href="icon.png" type="image/x-icon">
+    <link rel=stylesheet href="styles/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <script src="page.js"></script>
+    <script src="js/chartScript.js"></script>
+  
+    <title>fuck</title>
     <title></title>
     <meta charset="utf-8" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -9,65 +27,46 @@
     </style>
 </head>
 <body>
-    <canvas id="myChart"></canvas>
-    <script>
-        function callBack(data){
+    <h1 style="text-align: center;"><em>Reddit Investment Sentiment</em></h1>
 
-            console.log(data.responseJSON);
-            // chart_data = test(data.responseJSON);
-            // console.log(chart_data)
-            var chart_data = data.responseJSON;
-            array = []
-            x = []
-            for(let point in chart_data){
-                // console.log(point);
-                // console.log(point.score);
-                x.push(chart_data[point].date);
-                array.push(chart_data[point].score);
-            }
-            console.log(array)
-            bart_data = test(array,x)
-            var ctx = document.getElementById("myChart").getContext("2d");
-            //var myNewChart = new Chart(ctx).Line(chart_data);
-            var myNewChart = new Chart(ctx,{
-                type: 'line',
-                data: bart_data,
-
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button id="change-video" type="button" class="btn btn-info">Change Video</button>
+        <script type="text/javascript">
+        document.getElementById("change-video").onclick=function() {
+            AJAXReq(callBack,'CLOV',()=>{
+                console.log("success!");
             });
-
-        }
-        function AJAXReq(callback){
-            $.ajax({
-                url: '/posts',
-                type: 'get',
-                dataType: 'json',
-                complete: callBack,
-            });
-        }
-        function test(mata, x){
-            var data = {
-            labels: x,
-            datasets: [
-                    {
-                        label: "My First dataset",
-                        fillColor: "rgba(220,220,220,0.2)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: mata
-                    }
-                ]
-            };
-            //console.log(data);
-            return data;
-
+            
         };
-        AJAXReq(()=>{
-            console.log("success!");
+      </script>
+      </li>
+    </ul>
+  </nav>
+  <div class="dropdown show">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown link
+    </a>
+  
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" id="Clov" href="#">CLOV</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+    <script>
+        $('#Clov').on('click', function(){
+            AJAXReq(callBack,$('#Clov').text(),()=>{
+                console.log($('.dropdown-item').text);
+            });
         });
-        
+
     </script>
+  </div>
+  <!-- <iframe id="framey" width="1000" height="500" src="https://www.youtube.com/embed/y8piv2Kcd-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<canvas id="myChart"></canvas>
 </body>
 </html>
+
