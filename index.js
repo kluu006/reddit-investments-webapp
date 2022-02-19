@@ -11,6 +11,8 @@ const path = require('path');
 var app = Express();
 var database, collection;
 
+const cors = require('cors');
+
 
 const { JSDOM } = require( "jsdom" );
 const { window } = new JSDOM( "" );
@@ -18,7 +20,7 @@ const $ = require( "jquery" )( window );
 
 app.use('/js', Express.static(__dirname + '/js'));
 
-app.get("/threads/:stockName", (req, res) => {
+app.get("/threads/:stockName", cors(), (req, res) => {
     collection.find({query: req.params.stockName}).toArray((error, result) => {
         if(error) {
             return res.status(500).send(error);
@@ -33,7 +35,7 @@ app.get('/',(req, res) =>{
     //res.json(result);
 });
 
-app.listen(3000,()=>{
+app.listen(4000,()=>{
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
         if(error) {
             throw error;
