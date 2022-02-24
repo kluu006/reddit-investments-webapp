@@ -39,9 +39,8 @@ jobs:
     steps:
       - name: Create secret file
         run: |
-          mkdir secrets/
-          touch secrets/connectionurl.txt
-          echo ${{ secrets.CONNECTION_URL }} > secrets/connectionurl.txt
+          touch docker-dir/testcases_dockerfile/build_options/secrets/connectionurl.txt
+          echo ${{ secrets.CONNECTION_URL }} > docker-dir/testcases_dockerfile/build_options/secrets/connectionurl.txt
       - uses: actions/checkout@v2
       - name: Set AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -62,6 +61,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
 
         run: |
-          sudo DOCKER_BUILDKIT=1 docker build --secret id=connectionurl,src=secrets/connectionurl.txt -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          sudo DOCKER_BUILDKIT=1 docker build --secret id=connectionurl,src=connectionurl.txt -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           sudo docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       
