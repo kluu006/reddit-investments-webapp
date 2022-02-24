@@ -61,6 +61,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
 
         run: |
-          DOCKER_BUILDKIT=1 docker build --secret id=connectionurl,src=connectionurl.txt -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          DOCKER_BUILDKIT=1 docker build --secret id=connectionurl,src=./connectionurl.txt -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       
