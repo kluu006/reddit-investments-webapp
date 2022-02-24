@@ -4,7 +4,7 @@ const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 const fs = require("fs");
 //require('dotenv').config();
-const CONNECTION_URL = fs.readFileSync(__dirname + '/connectionurl.txt', 'utf8');
+const CONNECTION_URL = fs.readFileSync(__dirname + '/run/secrets/connectionurl', 'utf8');
 const DATABASE_NAME = "reddit"
 const http = require("http");
 const path = require('path');
