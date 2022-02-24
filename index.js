@@ -1,8 +1,9 @@
+import { secrets } from docker-secrets;
 const Express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
-require('dotenv').config();
-const CONNECTION_URL = process.env.CONNECTION_URL;
+//require('dotenv').config();
+const CONNECTION_URL = `${secrets.connectionurl}`;
 const DATABASE_NAME = "reddit"
 const http = require("http");
 const fs = require("fs");
