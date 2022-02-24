@@ -11,30 +11,9 @@ const path = require('path');
 //const chartScript = require('./chartScript.js')
 var app = Express();
 var database, collection;
-
-const cors = require('cors');
-
-
-const { JSDOM } = require( "jsdom" );
-const { window } = new JSDOM( "" );
-const $ = require( "jquery" )( window );
-
-app.use('/js', Express.static(__dirname + '/js'));
-
-app.get("/threads/:stockName", cors(), (req, res) => {
-    collection.find({query: req.params.stockName}).toArray((error, result) => {
-        if(error) {
-            return res.status(500).send(error);
-        }
-        res.json(result);
-    });
-});
-
-
-app.get('/',(req, res) =>{
-    res.sendFile(__dirname + '/index.html');
-    //res.json(result);
-});
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 
 app.listen(5000,()=>{
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
