@@ -39,7 +39,7 @@ jobs:
     steps:
       - name: Create secret file
         run: |
-          mkdir /secrets/
+          sudo mkdir /secrets/
           touch /secrets/connectionurl.txt
           echo ${{ secrets.CONNECTION_URL }} > /secrets/connectionurl.txt
       - uses: actions/checkout@v2
