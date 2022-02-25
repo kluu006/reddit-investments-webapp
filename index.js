@@ -3,8 +3,8 @@ const Express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 const fs = require("fs");
-//require('dotenv').config();
-const CONNECTION_URL = fs.readFileSync(__dirname + '/run/secrets/connectionurl', 'utf8');
+require('dotenv').config();
+const CONNECTION_URL = process.env.CONNECTION_URL;
 const DATABASE_NAME = "reddit"
 const http = require("http");
 const path = require('path');
