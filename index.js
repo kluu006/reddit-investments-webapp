@@ -11,18 +11,21 @@ const path = require('path');
 //const chartScript = require('./chartScript.js')
 var app = Express();
 var database, collection;
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+
+//const cors = require('cors');
+//const { JSDOM } = require( "jsdom" );
+//const { window } = new JSDOM( "" );
+//const $ = require( "jquery" )( window );
+
+app.use('/js', Express.static(__dirname + '/js'));
+
+
+app.get('/',(req, res) =>{
+    res.sendFile(__dirname + '/index.html');
+    //res.json(result);
+});
 
 app.listen(5000,()=>{
-    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
-        if(error) {
-            throw error;
-        }
-        database = client.db(DATABASE_NAME);
-        collection = database.collection("wallstreet-bets");
-        console.log("Connected to `" + DATABASE_NAME + "`!");
-    });
+    console.log("connected")
 });
 
